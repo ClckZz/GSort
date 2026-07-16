@@ -5,8 +5,16 @@
     <title>Hello World!</title>
     <link rel="stylesheet" href="index.css" />
     <script defer src="render.js"></script>
+    <script type="module">
+      import { animate, stagger } from "https://cdn.jsdelivr.net/npm/animejs@4.0.0/+esm";
+
+      window.animate = animate;
+      window.stagger = stagger;
+    </script>
   </head>
   <body>
-    <button id="categorize-btn" onclick="categorizePosts()">Categorize</button>
+    <input id="how_many_input" type="number" />How many?
+    <button id="categorize-btn">Categorize</button>
+    <button id="remove-btn">Remove</button>
   </body>
 </html>
