@@ -5,4 +5,54 @@ body {
   margin: auto;
   max-width: 38rem;
   padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  background-color: black;
+  overflow: hidden;
+}
+
+.other_inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.primary_btn {
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+}
+
+.how_many_input {
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+}
+
+.label-id-area {
+  grid-column: 1;
+  grid-row: 1/2;
+  background-color: grey;
+}
+
+.label-id-area p {
+  text-align: center;
+}
+
+.label-select {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
+.selection {
+  align-self: center;
+  height: 50%;
+  width: 50%;
 }

@@ -13,8 +13,43 @@
     </script>
   </head>
   <body>
-    <input id="how_many_input" type="number" />How many?
-    <button id="categorize-btn">Categorize</button>
-    <button id="remove-btn">Remove</button>
+    <div class="label-id-area">
+      <p>Select the fitting Email!</p>
+      <div class="label-select">
+        <p>Important</p>
+        <select name="Important" id="Important" class="selection">
+        </select>
+      </div>
+      <div class="label-select">
+        <p>Newsletter</p>
+        <select name="Newsletter" id="Newsletter" class="selection">
+        </select>
+      </div>
+      <div class="label-select">
+        <p>Shopping</p>
+        <select name="Shopping" id="Shopping" class="selection">
+        </select>
+      </div>
+      <div class="label-select">
+        <p>Finance</p>
+        <select name="Finance" id="Finance" class="selection">
+        </select>
+      </div>
+      <div class="label-select">
+        <p>Notifications</p>
+        <select name="Notifications" id="Notifications" class="selection">
+        </select>
+      </div>
+      <div class="label-select">
+        <p>Spam</p>
+        <select name="Spam" id="Spam" class="selection">
+        </select>
+      </div>
+    </div>
+    <div class="other_inputs">
+        <input id="how_many_input" type="number" class="how_many_input"/ placeholder="How many Emails would you like to change? (Max 500)">
+        <button id="categorize-btn" class="primary_btn">Categorize</button>
+        <button id="remove-btn" class="primary_btn">Remove</button>
+    </div>
   </body>
 </html>

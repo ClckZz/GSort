@@ -8,6 +8,8 @@ import base64
 from fastapi import FastAPI
 import requests
 import uvicorn
+from pydantic import BaseModel
+import json
 
 app = FastAPI()
 
@@ -47,6 +49,14 @@ LABEL_MAP = {
     "Spam": "Label_233584872602531714",
 }
 
+class Label(BaseModel):
+    Important: str
+    Newsletter: str
+    Shopping: str
+    Finance: str
+    Notifications: str
+    Spam: str
+
 
 def get_body(payload):
     # Fall 1: direkte body data
@@ -70,15 +80,17 @@ def get_body(payload):
 
     return None
 
+@app.get("/get_labels")
+def get_labels():
+    global service
+    labels = service.users().labels().list(userId="me").execute()
+
+    return labels
+
 @app.get("/remove_labels")
 def remove_labels(how_many: int):
     global service
     try:
-        labels = service.users().labels().list(userId="me").execute()
-
-        for label in labels["labels"]:
-            print(label["name"], label["id"])
-
         # Call the Gmail API
         service = build("gmail", "v1", credentials=creds)
         results = (
@@ -118,19 +130,30 @@ def remove_labels(how_many: int):
                     "removeLabelIds": remove_labels
                 }
             ).execute()
+        
+        return {
+            "message": "Removed successfully"
+        }
 
     except HttpError as error:
         # TODO(developer) - Handle errors from gmail API.
         print(f"An error occurred: {error}")
 
 @app.get("/categorize")
-def categorize(how_many: int):
+def categorize(how_many: int, desired_labels: str):
     global service
     try:
-        labels = service.users().labels().list(userId="me").execute()
+        labels = json.loads(desired_labels)
 
-        for label in labels["labels"]:
-            print(label["name"], label["id"])
+        LABEL_MAP["Important"] = labels["Important"]
+        LABEL_MAP["Newsletter"] = labels["Newsletter"]
+        LABEL_MAP["Shopping"] = labels["Shopping"]
+        LABEL_MAP["Finance"] = labels["Finance"]
+        LABEL_MAP["Notifications"] = labels["Notifications"]
+        LABEL_MAP["Spam"] = labels["Spam"]
+
+        for label in labels:
+            print(label)
 
         # Call the Gmail API
         service = build("gmail", "v1", credentials=creds)
