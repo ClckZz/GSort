@@ -85,7 +85,24 @@ def get_labels():
     global service
     labels = service.users().labels().list(userId="me").execute()
 
-    return labels
+    protected = {
+                "INBOX",
+                "UNREAD",
+                "SENT",
+                "DRAFT",
+                "SPAM",
+                "TRASH",
+                "CHAT",
+            }
+
+    remove_labels = {
+        "labels": [
+            l for l in labels["labels"]
+            if l["name"] not in protected
+        ]
+    }
+
+    return remove_labels
 
 @app.get("/remove_labels")
 def remove_labels(how_many: int):
@@ -118,7 +135,8 @@ def remove_labels(how_many: int):
                 "SENT",
                 "DRAFT",
                 "SPAM",
-                "TRASH"
+                "TRASH",
+                "CHAT",
             }
 
             remove_labels = [l for l in existing_labels if l not in protected]
