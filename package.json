@@ -1,8 +1,8 @@
 {
-  "name": "myy-app",
-  "productName": "myy-app",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "name": "GSort",
+  "productName": "gsort",
+  "version": "0.1.0",
+  "description": "Minimalistic Gmail Sorter",
   "main": "src/index.js",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "adm-zip": "^0.6.0",
     "electron-squirrel-startup": "^1.0.1"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.11.2",
     "@electron-forge/plugin-fuses": "^7.11.2",
     "@electron/fuses": "^1.8.0",
+    "@felixrieseberg/electron-forge-maker-nsis": "^7.2.0",
     "electron": "43.1.1"
   }
 }

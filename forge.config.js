@@ -2,13 +2,26 @@ const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
+  outDir: 'C:/GSort1',
   packagerConfig: {
-    asar: true,
+    asar: false,
+    ignore: [
+      /^\/out($|\/)/,
+      /^\/python-runtime($|\/)/,
+      /\.git($|\/)/,
+    ],
+    extraResource: [
+      './python-runtime',
+      './main.py',
+      './categorizer.py',
+      './QuotesNEw.txt',
+      './multi_class_model.pth',
+    ],
   },
   rebuildConfig: {},
   makers: [
     {
-      name: '@electron-forge/maker-squirrel',
+      name: '@felixrieseberg/electron-forge-maker-nsis',
       config: {},
     },
     {
@@ -25,20 +38,20 @@ module.exports = {
     },
   ],
   plugins: [
-    {
-      name: '@electron-forge/plugin-auto-unpack-natives',
-      config: {},
-    },
-    // Fuses are used to enable/disable various Electron functionality
-    // at package time, before code signing the application
-    new FusesPlugin({
-      version: FuseVersion.V1,
-      [FuseV1Options.RunAsNode]: false,
-      [FuseV1Options.EnableCookieEncryption]: true,
-      [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: false,
-      [FuseV1Options.EnableNodeCliInspectArguments]: false,
-      [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
-      [FuseV1Options.OnlyLoadAppFromAsar]: true,
-    }),
+    // TEMPORÄR ENTFERNT - benötigt asar:true, testen wir gerade ohne
+    // {
+    //   name: '@electron-forge/plugin-auto-unpack-natives',
+    //   config: {},
+    // },
+    // TEMPORÄR AUSKOMMENTIERT ZUM ISOLATIONSTEST
+    // new FusesPlugin({
+    //   version: FuseVersion.V1,
+    //   [FuseV1Options.RunAsNode]: false,
+    //   [FuseV1Options.EnableCookieEncryption]: true,
+    //   [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: false,
+    //   [FuseV1Options.EnableNodeCliInspectArguments]: false,
+    //   [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
+    //   [FuseV1Options.OnlyLoadAppFromAsar]: true,
+    // }),
   ],
 };

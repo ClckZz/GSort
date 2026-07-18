@@ -15,9 +15,9 @@ app = FastAPI()
 
 load_dotenv()
 
-client_id = os.getenv("CLIENT_ID")
+client_id = "214624057660-g16s0437uoa6809gh5lao5v0po7127ou.apps.googleusercontent.com"
 print(client_id)
-client_key = os.getenv("CLIENT_KEY")
+client_key = "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"
 
 SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
 
@@ -237,9 +237,12 @@ def categorize(how_many: int, desired_labels: str):
             }
 
 
-if __name__ == "__main__":
+@app.on_event("startup")
+async def on_startup():
     print("API_READY", flush=True)
-
+ 
+ 
+if __name__ == "__main__":
     uvicorn.run(
         app,
         host="127.0.0.1",

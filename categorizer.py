@@ -17,6 +17,7 @@ import torch.nn as nn
 from torch.nn import functional as F
 from sentence_transformers import SentenceTransformer
 from sklearn.model_selection import train_test_split
+import sys
 
 # ── Config ─────────────────────────────────────────────
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -33,9 +34,14 @@ CATEGORIES = [
 INPUT_SIZE = 384
 OUTPUT_SIZE = len(CATEGORIES)
 
-MODEL_PATH = "multi_class_model.pth"
-TRAIN_DATA_PATH = "QuotesNEw.txt"
-EMBED_CACHE_PATH = "embed_cache.npz"
+def resource_path(relative_path):
+    if getattr(sys, 'frozen', False):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+MODEL_PATH = resource_path("multi_class_model.pth")
+TRAIN_DATA_PATH = resource_path("QuotesNEw.txt")
+EMBED_CACHE_PATH = resource_path("embed_cache.npz")
 
 CONFIDENCE_THRESHOLD = 0.65
 RETRAIN_THRESHOLD = 10
