@@ -36,6 +36,7 @@ flow = InstalledAppFlow.from_client_config(
     SCOPES
 )
 
+# TODO: Open a tab in electron app instead
 creds = flow.run_local_server(port=0)
 
 service = build("gmail", "v1", credentials=creds)

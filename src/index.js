@@ -59,6 +59,7 @@ function startBackend() {
     console.log('[backend]', output);
     logStream.write(`[stdout] ${output}`);
 
+    // TODO: change to lazy load --> visual startup doesnt require that long
     if (!started && output.includes('API_READY')) {
       started = true;
       createWindow();
